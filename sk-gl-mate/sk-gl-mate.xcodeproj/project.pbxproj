@@ -15,6 +15,12 @@
 		990957071AAAFD6100E3FE38 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 990957051AAAFD6100E3FE38 /* LaunchScreen.xib */; };
 		990957131AAAFD6200E3FE38 /* sk_gl_mateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990957121AAAFD6200E3FE38 /* sk_gl_mateTests.swift */; };
 		9909571D1AAB04D400E3FE38 /* CustomContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9909571C1AAB04D400E3FE38 /* CustomContactDelegate.swift */; };
+		9973C5B81AB99116003FCE2A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5B71AB99116003FCE2A /* Player.swift */; };
+		9973C5BA1AB9B4B9003FCE2A /* EndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5B91AB9B4B9003FCE2A /* EndScene.swift */; };
+		9973C5BC1AB9B8EE003FCE2A /* CustomSKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5BB1AB9B8EE003FCE2A /* CustomSKView.swift */; };
+		9973C5BF1AB9C130003FCE2A /* MonsterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5BE1AB9C130003FCE2A /* MonsterFactory.swift */; };
+		9973C5C11AB9C143003FCE2A /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5C01AB9C143003FCE2A /* Monster.swift */; };
+		9973C5C31AB9C2A6003FCE2A /* PhysicsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973C5C21AB9C2A6003FCE2A /* PhysicsCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +46,12 @@
 		990957111AAAFD6200E3FE38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		990957121AAAFD6200E3FE38 /* sk_gl_mateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sk_gl_mateTests.swift; sourceTree = "<group>"; };
 		9909571C1AAB04D400E3FE38 /* CustomContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomContactDelegate.swift; sourceTree = "<group>"; };
+		9973C5B71AB99116003FCE2A /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		9973C5B91AB9B4B9003FCE2A /* EndScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndScene.swift; sourceTree = "<group>"; };
+		9973C5BB1AB9B8EE003FCE2A /* CustomSKView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSKView.swift; sourceTree = "<group>"; };
+		9973C5BE1AB9C130003FCE2A /* MonsterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonsterFactory.swift; sourceTree = "<group>"; };
+		9973C5C01AB9C143003FCE2A /* Monster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
+		9973C5C21AB9C2A6003FCE2A /* PhysicsCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +93,14 @@
 		990956F51AAAFD6100E3FE38 /* sk-gl-mate */ = {
 			isa = PBXGroup;
 			children = (
+				9973C5B61AB990FB003FCE2A /* Controller */,
+				9973C5B51AB990F5003FCE2A /* View */,
+				9973C5B41AB990EE003FCE2A /* Model */,
 				990956F81AAAFD6100E3FE38 /* AppDelegate.swift */,
-				990956FC1AAAFD6100E3FE38 /* GameScene.swift */,
-				990956FE1AAAFD6100E3FE38 /* GameViewController.swift */,
 				990957001AAAFD6100E3FE38 /* Main.storyboard */,
 				990957031AAAFD6100E3FE38 /* Images.xcassets */,
 				990957051AAAFD6100E3FE38 /* LaunchScreen.xib */,
 				990956F61AAAFD6100E3FE38 /* Supporting Files */,
-				9909571C1AAB04D400E3FE38 /* CustomContactDelegate.swift */,
 			);
 			path = "sk-gl-mate";
 			sourceTree = "<group>";
@@ -116,6 +128,36 @@
 				990957111AAAFD6200E3FE38 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9973C5B41AB990EE003FCE2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9909571C1AAB04D400E3FE38 /* CustomContactDelegate.swift */,
+				9973C5B71AB99116003FCE2A /* Player.swift */,
+				9973C5BE1AB9C130003FCE2A /* MonsterFactory.swift */,
+				9973C5C01AB9C143003FCE2A /* Monster.swift */,
+				9973C5C21AB9C2A6003FCE2A /* PhysicsCategory.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9973C5B51AB990F5003FCE2A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				990956FC1AAAFD6100E3FE38 /* GameScene.swift */,
+				9973C5B91AB9B4B9003FCE2A /* EndScene.swift */,
+				9973C5BB1AB9B8EE003FCE2A /* CustomSKView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9973C5B61AB990FB003FCE2A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				990956FE1AAAFD6100E3FE38 /* GameViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,10 +260,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9973C5BC1AB9B8EE003FCE2A /* CustomSKView.swift in Sources */,
+				9973C5C11AB9C143003FCE2A /* Monster.swift in Sources */,
+				9973C5BA1AB9B4B9003FCE2A /* EndScene.swift in Sources */,
 				9909571D1AAB04D400E3FE38 /* CustomContactDelegate.swift in Sources */,
 				990956FD1AAAFD6100E3FE38 /* GameScene.swift in Sources */,
 				990956FF1AAAFD6100E3FE38 /* GameViewController.swift in Sources */,
+				9973C5B81AB99116003FCE2A /* Player.swift in Sources */,
+				9973C5C31AB9C2A6003FCE2A /* PhysicsCategory.swift in Sources */,
 				990956F91AAAFD6100E3FE38 /* AppDelegate.swift in Sources */,
+				9973C5BF1AB9C130003FCE2A /* MonsterFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +463,7 @@
 				990957181AAAFD6200E3FE38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		990957191AAAFD6200E3FE38 /* Build configuration list for PBXNativeTarget "sk-gl-mateTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +472,7 @@
 				9909571B1AAAFD6200E3FE38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
