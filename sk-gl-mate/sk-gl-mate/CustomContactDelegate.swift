@@ -12,35 +12,95 @@ import SpriteKit
 
 class CustomContactDelegate: NSObject, SKPhysicsContactDelegate{
     
-    var player:Player?
+    var home: GameScene?
     
-    
-    
-    init(PrimaryPlayer:Player){
+    init(parent: GameScene){
         super.init()
-        player = PrimaryPlayer
-        println("Initialized")
+        home = parent
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == PhysicsCategory.Player && contact.bodyB.categoryBitMask == PhysicsCategory.Monster {
+        var bodyA = contact.bodyA
+        var bodyB = contact.bodyB
+        
+        if bodyA.categoryBitMask == PhysicsCategory.Player && bodyB.categoryBitMask == PhysicsCategory.Monster {
         }
-        else if contact.bodyB.categoryBitMask == PhysicsCategory.Player && contact.bodyA.categoryBitMask == PhysicsCategory.Monster{
+        else if bodyB.categoryBitMask == PhysicsCategory.Player && bodyA.categoryBitMask == PhysicsCategory.Monster{
         }
         
-        if contact.bodyA.categoryBitMask == PhysicsCategory.Player || contact.bodyB.categoryBitMask == PhysicsCategory.Player{
-            player!.playerFooting++
+        //What happens when the player collides
+        if bodyA.categoryBitMask == PhysicsCategory.Player || bodyB.categoryBitMask == PhysicsCategory.Player{
+            //get the object that just collided
+            //decrease footing
+            
+            if bodyA.node!.name == "mob" {
+                var mob = bodyA.node! as Mob
+                mob.playerFooting++
+            }
+            if bodyB.node!.name == "mob" {
+                var mob = bodyB.node! as Mob
+                mob.playerFooting++
+            }
+            
         }
         
-        if contact.bodyA.categoryBitMask == PhysicsCategory.Floor || contact.bodyB.categoryBitMask == PhysicsCategory.Floor{
+        //What happens when a monster collides
+        if bodyA.categoryBitMask == PhysicsCategory.Monster || bodyB.categoryBitMask == PhysicsCategory.Monster{
+            //get the object that just collided
+            //decrease footing
+            
+            if bodyA.node!.name == "mob" {
+                var mob = bodyA.node! as Mob
+                mob.playerFooting++
+            }
+            if bodyB.node!.name == "mob" {
+                var mob = bodyB.node! as Mob
+                mob.playerFooting++
+            }
+            
+        }
+        
+        //What happens when the floor collides
+        if bodyA.categoryBitMask == PhysicsCategory.Floor || bodyB.categoryBitMask == PhysicsCategory.Floor{
+        
         }
         
     }
     
     func didEndContact(contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == PhysicsCategory.Player || contact.bodyB.categoryBitMask == PhysicsCategory.Player{
-            player!.playerFooting--
+        var bodyA = contact.bodyA
+        var bodyB = contact.bodyB
+        
+        //What happens when the player collides
+        if bodyA.categoryBitMask == PhysicsCategory.Player || bodyB.categoryBitMask == PhysicsCategory.Player{
+            //player!.playerFooting--
+            if bodyA.node!.name == "mob" {
+                var mob = bodyA.node! as Mob
+                mob.playerFooting--
+            }
+            if bodyB.node!.name == "mob" {
+                var mob = bodyB.node! as Mob
+                mob.playerFooting--
+            }
         }
+        
+        //What happens when a monster collides
+        if bodyA.categoryBitMask == PhysicsCategory.Monster || bodyB.categoryBitMask == PhysicsCategory.Monster{
+            //player!.playerFooting--
+            if bodyA.node!.name == "mob" {
+                var mob = bodyA.node! as Mob
+                mob.playerFooting--
+            }
+            if bodyB.node!.name == "mob" {
+                var mob = bodyB.node! as Mob
+                mob.playerFooting--
+            }
+        }
+    }
+    
+    func isPlayer(bodyA: SKPhysicsBody, bodyB: SKPhysicsBody) -> Bool{
+        
+        return false
     }
     
 }

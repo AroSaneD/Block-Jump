@@ -8,26 +8,24 @@
 
 import SpriteKit
 
-class Player : SKSpriteNode{
-    var playerFooting:NSInteger = 0;
+class Player : Mob{
+    
 
     
-    /*
-    init(imageName: NSString){
     
-        super.init(imageNamed: imageName)
+    override init(imageName: NSString, parent: GameScene){
+    
+        super.init(imageName: imageName, parent: parent)
         
-        position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
-        //player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
-        //player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size, center: CGPoint(x: player.size.width*0.15, y: player.size.height*0.15))
-        physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        position = CGPoint(x: home!.size.width * 0.1, y: size.height * 0.5)
+        
         physicsBody?.categoryBitMask = PhysicsCategory.Player
-        physicsBody?.collisionBitMask = PhysicsCategory.Floor | PhysicsCategory.Monster
-        physicsBody?.contactTestBitMask = PhysicsCategory.Floor | PhysicsCategory.Monster
-        physicsBody?.restitution = 0
-        physicsBody?.dynamic = true
 
     }
-*/
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     
 }
