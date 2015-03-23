@@ -11,17 +11,17 @@ import SpriteKit
 class Monster: Mob {
     
     var dieAction: SKAction?
+    var moveAction: SKAction?
+    var cycleCount: NSInteger?
     
     override init(imageName: NSString, parent: GameScene) {
         super.init(imageName: imageName, parent: parent)
         physicsBody?.categoryBitMask = PhysicsCategory.Monster
         
         position = CGPoint(x: home!.size.width * 1.8, y: home!.size.height * 0.3)
+        cycleCount = 300
         
-        let actualDuration = Global.random(min: CGFloat(2.5), max: CGFloat(3.2))
-        
-        //let moveAction = SKAction.moveTo(CGPoint(x: 0, y: monster.position.y), duration: NSTimeInterval(actualDuration))
-        let moveAction = SKAction.moveBy(CGVector(dx: home!.size.width * -0.01, dy: 0.01), duration: 0.022)
+        moveAction = SKAction.moveBy(CGVector(dx: home!.size.width * -0.01, dy: 0.01), duration: 0.022)
         
         
         dieAction = SKAction.sequence([
@@ -31,17 +31,22 @@ class Monster: Mob {
         
         
         //monster.runAction(SKAction.sequence([moveAction, dieAction]))
+        
+        //monster.runAction(SKAction.repeatActionForever(SKAction.sequence([moveAction, SKAction.waitForDuration(0.005)])))
+        
+    }
+
+    func beginActions(){
+
         self.runAction(
             SKAction.sequence([
                 SKAction.repeatAction(
                     SKAction.sequence([
                         moveAction,
                         SKAction.runBlock(logic)
-                        ]), count: 300),
+                        ]), count: cycleCount),
                 dieAction! ])
         )
-        //monster.runAction(SKAction.repeatActionForever(SKAction.sequence([moveAction, SKAction.waitForDuration(0.005)])))
-        
     }
     
     func logic(){

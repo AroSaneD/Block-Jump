@@ -1,0 +1,38 @@
+Mob <-- Player
+	<-- Monster 	<--	Jumper
+					<--	Assassin
+
+GameScene <>--- MonsterFactory - - - generateMonster
+
+GameViewController --- GameScene
+
+PhysicsCategory, MonsterCategory 	- for consistent id's
+CustomContactDelegate 				- handles contact in the gamescene
+Global 		-	global static methods (randoms, etc)
+
+EndScene 	-	game over screen
+
+
+
+Mob
+	Standart mob object. Doesnt have anything special to it,  just the base for anything that will be interactable
+
+Player: Mob
+	Player class.
+
+Monster: Mob
+	Enemy class. Standart enemy (with no special effects). Has the base for all special mobs (declarable in logic() method)
+	
+	Life cycle: move, apply logic, die after a set amount of cycles and/or when a certain criteria is met
+
+Jumper: Monster
+	Special enemy. When close to the player, will jump at him (or atleast in to the air)
+
+Assassin: Monster
+	Spawns in the back of the screen. Slowly creeps up on the player. The only way to escape is by running to the right. If player runs away far enough, the assassin will despawn. 
+
+	The Assassin does not collide with other mob objects
+
+MonsterFactory
+	An object in the GameScene object that handles all monster spawning. Intelligence may vary.
+

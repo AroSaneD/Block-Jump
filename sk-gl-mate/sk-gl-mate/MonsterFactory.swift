@@ -30,6 +30,7 @@ class MonsterFactory{
         
         home!.addChild(monster)
         home!.mobs!.append(monster)
+        monster.beginActions()
         
     }
     

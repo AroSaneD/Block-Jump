@@ -1,0 +1,21 @@
+Mob collision
+	Evolve?
+	Join?
+	
+Player upgrades
+	go through mobs
+	multi-jump
+	
+Traps
+	Spikes
+	Lava
+	Teleporters
+
+Ceiling
+	If collides, bounces off. Hard
+
+More mob types
+	Need ideas... 
+
+
+Need apple computer
