@@ -23,8 +23,16 @@ class EndScene : SKScene{
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        
-        controller?.displayGameScene()
+
+        var touch = touches.anyObject() as UITouch
+        var currentTouchPoint = touch.locationInNode(self)
+
+        if currentTouchPoint.x > size.width*0.3 && currentTouchPoint.y > size.width*0.3{ // subtract by sprite (button size) later
+            controller?.displayShopScreen()
+        }
+        else{
+            controller?.displayGameScene()
+        }
         
     }
     

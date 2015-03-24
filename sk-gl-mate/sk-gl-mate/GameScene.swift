@@ -84,6 +84,7 @@ class GameScene: SKScene{
             }
         }
         
+
         
     }
    
@@ -99,7 +100,7 @@ class GameScene: SKScene{
         if(player!.frame.midX > size.width*screenScale){
             let diff:CGFloat = player!.frame.midX - size.width*screenScale
             for mob in mobs!{
-                mob.runAction(SKAction.moveByX(-1*diff, y: 0, duration: 0))
+                mob.runAction(SKAction.moveByX(-1*diff, y: 0, duration: 0.2))
             }
         }
     }

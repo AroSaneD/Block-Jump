@@ -18,6 +18,17 @@ More mob types
 	Need ideas... 
 
 Achievements:
+	Steps:
+		1. Need to measure travelled distance{
+			on each update call{
+				1. Mark the current coordinates
+				2. Subtract current coordinates from previous
+				3. Add difference to ruler
+			}
+			when scree shifts, add the difference to the ruler
+		}
+		2. Invent special formula to calculate gained currency (more travelled = more gained ^ 1.5)
+		3. Make the view controller hold the money (since it's global, later make minions save it in memory)
 	Get score/money
 	Get medals
 	Get honour points
@@ -27,7 +38,7 @@ Reset system:
 	Get bonuses based on your expended honour
 	Get achievements based on resets/ lost honour
 	
-In game shop:
+In game shop: <-- BEGAN need mac to see what I'm doing
 	Purchase upgrades
 	More items unlock with upgrades / resets
 	Fancy shop keeper
