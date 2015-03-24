@@ -9,7 +9,7 @@ Player upgrades
 Traps
 	Spikes
 	Lava
-	Teleporters
+	Teleport pad/Force jump
 
 Ceiling
 	If collides, bounces off. Hard
@@ -17,5 +17,28 @@ Ceiling
 More mob types
 	Need ideas... 
 
+Achievements:
+	Get score/money
+	Get medals
+	Get honour points
+
+Reset system:
+	Start a new game continuing/expending your honour points
+	Get bonuses based on your expended honour
+	Get achievements based on resets/ lost honour
+	
+In game shop:
+	Purchase upgrades
+	More items unlock with upgrades / resets
+	Fancy shop keeper
+	Fancy shop keeper jokes
+	
+	
+Random items in the air
+	Collect for bonuses:
+		Double jump
+		1 Shield
+		etc.
+	
 
 Need apple computer
