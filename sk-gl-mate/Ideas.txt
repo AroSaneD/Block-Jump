@@ -12,7 +12,12 @@ Traps
 	Teleport pad/Force jump
 
 Ceiling
-	If collides, bounces off. Hard
+	Restitution = 1
+	If collides, bounces off.{
+		1. Adds force to objects current vector
+		2. Sets its restitution to 1 for the impact
+		3. After impact ended, set the restitution back to 0
+	}
 
 More mob types
 	Need ideas... 
@@ -50,6 +55,16 @@ Random items in the air
 		Double jump
 		1 Shield
 		etc.
-	
+		Gold
+	Quests
+		Damsel in distress
+		Target practise (if clicked near a certain object, player doesn't jump, but launches a projectile)
+		
+
+FIXES:
+	Smarter mob generation (especially with special mobs)
+	Add some (minor) restitution to the floor
+	Generate objects in accordance to the screen (so the mob is ~10% of the screen)
+	Is is possible to scale images?
 
 Need apple computer
