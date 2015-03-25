@@ -11,6 +11,7 @@ import UIKit
 struct MonsterCategory{
     static let standart = 0
     static let jumper = 1
+    static let assassin = 2
     
-    static let max = 2
+    static let max = 3
 }

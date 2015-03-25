@@ -71,4 +71,20 @@ class GameViewController: UIViewController {
         scene.scaleMode = .ResizeFill
         skView.presentScene(scene)
     }
+    
+    func displayShopScreen(){
+        let scene = ShopScene(size: view.bounds.size, controller: self)
+        
+        // Confwigure the view.
+        let skView = self.view as SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.showsPhysics = true
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        scene.scaleMode = .ResizeFill
+        skView.presentScene(scene)
+    }
 }

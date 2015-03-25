@@ -26,6 +26,7 @@
 		997A6A351ABD9A0000F43097 /* Assassin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997A6A341ABD9A0000F43097 /* Assassin.swift */; };
 		99A251461ABD706600D2D4BC /* Mob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A251451ABD706600D2D4BC /* Mob.swift */; };
 		99A2514A1ABD733E00D2D4BC /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A251491ABD733E00D2D4BC /* Global.swift */; };
+		99D9614D1AC30824004B095E /* ShopScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D9614C1AC30824004B095E /* ShopScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		997A6A341ABD9A0000F43097 /* Assassin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assassin.swift; sourceTree = "<group>"; };
 		99A251451ABD706600D2D4BC /* Mob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mob.swift; sourceTree = "<group>"; };
 		99A251491ABD733E00D2D4BC /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		99D9614C1AC30824004B095E /* ShopScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				990956FC1AAAFD6100E3FE38 /* GameScene.swift */,
 				9973C5B91AB9B4B9003FCE2A /* EndScene.swift */,
 				9973C5BB1AB9B8EE003FCE2A /* CustomSKView.swift */,
+				99D9614C1AC30824004B095E /* ShopScene.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			files = (
 				9973C5BC1AB9B8EE003FCE2A /* CustomSKView.swift in Sources */,
 				9973C5C11AB9C143003FCE2A /* Monster.swift in Sources */,
+				99D9614D1AC30824004B095E /* ShopScene.swift in Sources */,
 				9950A9341ABD83B200818EEC /* Jumper.swift in Sources */,
 				9973C5BA1AB9B4B9003FCE2A /* EndScene.swift in Sources */,
 				9909571D1AAB04D400E3FE38 /* CustomContactDelegate.swift in Sources */,

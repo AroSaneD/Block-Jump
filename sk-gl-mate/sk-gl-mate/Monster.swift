@@ -13,11 +13,13 @@ class Monster: Mob {
     var dieAction: SKAction?
     var moveAction: SKAction?
     var cycleCount: NSInteger?
+    var target: Player?
     
-    override init(imageName: NSString, parent: GameScene) {
-        super.init(imageName: imageName, parent: parent)
+    override init(parent: GameScene) {
+        super.init(parent: parent)
+        self.color = SKColor.redColor()
         physicsBody?.categoryBitMask = PhysicsCategory.Monster
-        
+        target = parent.player!
         position = CGPoint(x: home!.size.width * 1.8, y: home!.size.height * 0.3)
         cycleCount = 300
         
@@ -42,11 +44,12 @@ class Monster: Mob {
             SKAction.sequence([
                 SKAction.repeatAction(
                     SKAction.sequence([
-                        moveAction,
-                        SKAction.runBlock(logic)
-                        ]), count: cycleCount),
-                dieAction! ])
+                        moveAction!,
+                        SKAction.runBlock(self.logic)
+                        ]), count: cycleCount!),
+                dieAction!])
         )
+
     }
     
     func logic(){

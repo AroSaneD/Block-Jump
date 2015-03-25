@@ -35,11 +35,15 @@ class CustomContactDelegate: NSObject, SKPhysicsContactDelegate{
             
             if bodyA.node!.name == "mob" {
                 var mob = bodyA.node! as Mob
-                mob.playerFooting++
+                if bodyB.node!.name != "mob" {
+                    mob.playerFooting++
+                }
             }
             if bodyB.node!.name == "mob" {
                 var mob = bodyB.node! as Mob
-                mob.playerFooting++
+                if bodyA.node!.name != "mob" {
+                    mob.playerFooting++
+                }
             }
             
         }
@@ -51,11 +55,15 @@ class CustomContactDelegate: NSObject, SKPhysicsContactDelegate{
             
             if bodyA.node!.name == "mob" {
                 var mob = bodyA.node! as Mob
-                mob.playerFooting++
+                if bodyB.node!.name != "mob" {
+                    mob.playerFooting++
+                }
             }
             if bodyB.node!.name == "mob" {
                 var mob = bodyB.node! as Mob
-                mob.playerFooting++
+                if bodyA.node!.name != "mob" {
+                    mob.playerFooting++
+                }
             }
             
         }
@@ -76,11 +84,15 @@ class CustomContactDelegate: NSObject, SKPhysicsContactDelegate{
             //player!.playerFooting--
             if bodyA.node!.name == "mob" {
                 var mob = bodyA.node! as Mob
-                mob.playerFooting--
+                if bodyB.node!.name != "mob" {
+                    mob.playerFooting--
+                }
             }
             if bodyB.node!.name == "mob" {
                 var mob = bodyB.node! as Mob
-                mob.playerFooting--
+                if bodyA.node!.name != "mob" {
+                    mob.playerFooting--
+                }
             }
         }
         
@@ -89,11 +101,15 @@ class CustomContactDelegate: NSObject, SKPhysicsContactDelegate{
             //player!.playerFooting--
             if bodyA.node!.name == "mob" {
                 var mob = bodyA.node! as Mob
-                mob.playerFooting--
+                if bodyB.node!.name != "mob" {
+                    mob.playerFooting--
+                }
             }
             if bodyB.node!.name == "mob" {
                 var mob = bodyB.node! as Mob
-                mob.playerFooting--
+                if bodyA.node!.name != "mob" {
+                    mob.playerFooting--
+                }
             }
         }
     }

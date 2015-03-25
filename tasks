@@ -1,0 +1,33 @@
+Ideas:
+
+More enemy types: 
+[ ]	Seeker (blue) - will follow player until they collide. If collides, player gets (…). 
+		Must run away from him to get rid of him
+[ ] 	Assassin - comes from behind. Will Follow you until he gives up
+[X]	Jumper  (brownish) - will jump when directly below the player
+	
+Enemy collision - should enemies merge when they collide with the same type?
+	Evolve - becomes something new
+	Improve - becomes bigger, faster and collisions make a bigger impact
+	Explode - more mini versions appear of it
+
+Random generation:
+[ ]	should enemies appear from everywhere (not just the right side?)
+[X]	should they appear at random intervals?
+		more detailed randomization
+	
+Player upgrades:
+	spare lives
+	resistance to mobs
+	multi-jump
+	fly?
+	
+Traps: 
+	spikes
+	lava pit
+	laser beams
+	rockets
+	
+Platforms???
+	
+

@@ -21,25 +21,28 @@ class MonsterFactory{
         var monster:Monster
         switch index{
         case MonsterCategory.standart:
-            monster = createStandart()
+            monster = Monster(parent: home!)
         case MonsterCategory.jumper:
-            monster = createJumper()
+            monster = Jumper(parent: home!)
+        case MonsterCategory.assassin:
+            monster = Assassin(parent: home!)
         default:
-            monster = createStandart()
+            monster = Monster(parent: home!)
         }
         
         home!.addChild(monster)
         home!.mobs!.append(monster)
+        
         monster.beginActions()
         
     }
     
     func createStandart() -> Monster{
-        var monster = Monster(imageName: "monster.png", parent: home!)
+        var monster = Monster(parent: home!)
         return monster
     }
     func createJumper() -> Monster{
-        var monster = Jumper(imageName: "jumper.png", parent: home!)
+        var monster = Jumper(parent: home!)
         
         return monster
     }

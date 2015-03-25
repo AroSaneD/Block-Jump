@@ -12,11 +12,28 @@ class Mob: SKSpriteNode {
     
     var playerFooting:NSInteger = 0;
     var home:GameScene?
+    var mobSize:CGFloat = 0.075 
     
-    init(imageName: NSString, parent: GameScene){
+    init(parent: GameScene){
+        super.init(
+            texture: nil,
+            color: UIColor.redColor(),
+            size: CGSize(width: CGFloat(parent.size.height * mobSize), height: CGFloat(parent.size.height * mobSize)))
+        
         home  = parent
-        let texture = SKTexture(imageNamed: imageName)
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        
+        //
+        
+        
+        /*let test = SKSpriteNode(
+            texture: SKTexture("monster.png")!,
+            color: UIColor.redColor(),
+            size: CGSize(width: parent.size.width * mobSize, height: parent.size.height * mobSize))*/
+        /*
+        super.init(texture: SKTexture("monster.png"),color: SKColor.redColor(), size: CGSize(width: parent.size.width * mobSize, height: parent.size.height * mobSize))
+        */
+        
+        
         physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         physicsBody?.restitution = 0
         physicsBody?.dynamic = true
@@ -25,7 +42,6 @@ class Mob: SKSpriteNode {
         physicsBody?.contactTestBitMask = PhysicsCategory.Floor | PhysicsCategory.Monster | PhysicsCategory.Player
         
         self.name = "mob"
-
         
     }
     

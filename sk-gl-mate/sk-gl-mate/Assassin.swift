@@ -10,12 +10,12 @@ import SpriteKit
 
 class Assassin : Monster{
 
-    var followed: bool?
+    var followed: Bool?
 
-    override init(imageName: NSString, parent: GameScene) {
-        super.init(imageName: imageName, parent: parent)
-        
-        cycleCount = 1000
+    override init(parent: GameScene) {
+        super.init(parent: parent)
+        color = SKColor.blackColor()
+        cycleCount = 250
 
 
         //colides with ground & player
@@ -30,8 +30,7 @@ class Assassin : Monster{
         followed = false
         
         //follows the player, speeds up as the player goes farther away
-        let moveAction = SKAction.moveBy(CGVector(dx: (home!.player!.frame.midX - self.frame.midX) / 20, dy: 0.01), duration: 0.22)
-        
+
 
         //TODO: implement a lazy action. When the cycles run out, just stand still and wait for the player to run away
     }
@@ -39,18 +38,35 @@ class Assassin : Monster{
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    override func beginActions(){
+        self.runAction(
+            SKAction.sequence([
+                SKAction.repeatAction(
+                    SKAction.sequence([
+                        SKAction.runBlock({
+                            self.runAction(SKAction.moveBy(CGVector(dx: (self.home!.player!.frame.midX - self.frame.midX) / 50, dy: 0.01), duration: 0.02))
+                        }),
+                        SKAction.runBlock(self.logic)
+                        ]), count: cycleCount!), dieAction!])
+        )
+
+        
+    }
 
     override func logic(){
         //if player in less than x and in air, jump up in accordance to players coordinates
-        if player.frame.midX - self.frame.width*4 < self.frame.midX {
-            if player.frame.midY > self.frame.midY + self.frame.height {
+        //moveAction = SKAction.moveBy(CGVector(dx: (home!.player!.frame.midX - self.frame.midX) / 10, dy: 0.01), duration: 0.02)
+        
+        if target!.frame.midX - self.frame.width*4 < self.frame.midX {
+            if target!.frame.midY > self.frame.midY + self.frame.height {
                 jump()
             } 
         }
 
         //if falls behind the screen, dies
-        if self.frame.midX < 0 && followed {
-            self.runAction(dieAction)
+        if self.frame.midX < 0 && followed! {
+            //self.runAction(dieAction!)
         }
 
         if self.frame.minX > 0 {

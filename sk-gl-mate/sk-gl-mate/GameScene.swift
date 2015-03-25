@@ -16,6 +16,9 @@ class GameScene: SKScene{
     var controller:GameViewController?
     var mobs:[SKSpriteNode]?
     var monsterFactory: MonsterFactory?
+    var lastKnownPosition: Float = 0
+    var distanceTravelled: Float = 0
+    var score:SKLabelNode?
     
     var playerFooting:NSInteger = 0;
     
@@ -42,6 +45,8 @@ class GameScene: SKScene{
         physicsWorld.gravity = CGVector(dx: 0, dy: -7.8)
         addPlayer()
         addGround()
+        addScore()
+        lastKnownPosition = Float(player!.frame.midX)
         cDelegate = CustomContactDelegate(parent: self)
         physicsWorld.contactDelegate = cDelegate!
         monsterFactory = MonsterFactory(parent: self)
@@ -60,7 +65,7 @@ class GameScene: SKScene{
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         if player!.playerFooting > 0 {
-            player!.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 4))
+            //player!.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 4))
         }
         var touch = touches.anyObject() as UITouch
         touchPoint = touch.locationInNode(self)
@@ -72,7 +77,15 @@ class GameScene: SKScene{
         var touch = touches.anyObject() as UITouch
         var currentTouchPoint = touch.locationInNode(self)
         
-        var difference = touchPoint!.y - currentTouchPoint.y //CGPoint(x: touchPoint!.x - currentTouchPoint.x, y: touchPoint!.y - currentTouchPoint.x)
+        var difference = touchPoint!.y - currentTouchPoint.y
+        let vectorReduction: CGFloat = 10
+        var directionVector = CGVector(dx: (currentTouchPoint.x - touchPoint!.x)/(vectorReduction*4), dy:(currentTouchPoint.y - touchPoint!.y) / vectorReduction)
+        
+        player!.jump(directionVector)
+        //if player!.playerFooting > 0 { player!.physicsBody!.applyImpulse(directionVector)}
+        
+        /*
+        //CGPoint(x: touchPoint!.x - currentTouchPoint.x, y: touchPoint!.y - currentTouchPoint.x)
         if player?.playerFooting == 0 {
             if(currentTouchPoint.x < player!.frame.minX && touchPoint!.x < player!.frame.minX){
                 player!.physicsBody?.applyAngularImpulse(difference * -0.001)
@@ -83,13 +96,18 @@ class GameScene: SKScene{
                 //player!.physicsBody?.applyTorque(difference * 0001)
             }
         }
-        
+        */
 
         
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        distanceTravelled += Float(Float(player!.frame.midX) - lastKnownPosition)
+        lastKnownPosition = Float(player!.frame.midX)
+        score!.text = "\(Int(distanceTravelled))"
+        
+        
         if(player!.frame.midX < 0  || player!.frame.midY < 0){
             println("Game over, m8")
             removeMob(player!)
@@ -99,16 +117,20 @@ class GameScene: SKScene{
         let screenScale:CGFloat = 0.75
         if(player!.frame.midX > size.width*screenScale){
             let diff:CGFloat = player!.frame.midX - size.width*screenScale
+            distanceTravelled += Float(diff)
             for mob in mobs!{
-                mob.runAction(SKAction.moveByX(-1*diff, y: 0, duration: 0.2))
+                mob.runAction(SKAction.moveByX(-1*diff, y: 0, duration: 0))
             }
         }
+        
+        println("\(mobs!.count)")
+        
     }
     
     
     
     func addPlayer(){
-        player = Player(imageName: "player.png", parent: self)
+        player = Player(parent: self)
 
         addChild(player!)
         mobs?.append(player!)
@@ -131,16 +153,17 @@ class GameScene: SKScene{
         
         addChild(floor)
     }
-    
-    
-    
-    func addMonster(){
-        var monster = Monster(imageName: "monster.png", parent: self)
-        addChild(monster)
-        mobs?.append(monster)
+    func addScore(){
+        score = SKLabelNode(fontNamed: "Helvetica")
+
+        score!.text = "0"
+        score!.fontColor = SKColor.blackColor()
+        score!.fontSize = 30
+        score!.position = CGPoint(x: size.width - score!.frame.width/2, y: size.height - score!.frame.height)
+        score!.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        addChild(score!)
+        
     }
-    
-    
     
     func removeMob(mob: SKSpriteNode){
         let index = find(mobs!, mob)
