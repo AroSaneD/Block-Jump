@@ -129,10 +129,6 @@ class GameScene: SKScene{
             }
         }
         
-        //
-        
-        println("\(mobs!.count)")
-        
     }
     
     
