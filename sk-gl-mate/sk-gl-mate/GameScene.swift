@@ -19,8 +19,9 @@ class GameScene: SKScene{
     var lastKnownPosition: Float = 0
     var distanceTravelled: Float = 0
     var score:SKLabelNode?
+    var lastWallPlacedAt: Float = 0
     
-    var playerFooting:NSInteger = 0;
+
     
     struct PhysicsCategory {
         static let None      : UInt32 = 0
@@ -42,9 +43,10 @@ class GameScene: SKScene{
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
-        physicsWorld.gravity = CGVector(dx: 0, dy: -7.8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -5.8)
         addPlayer()
         addGround()
+        addCeiling()
         addScore()
         lastKnownPosition = Float(player!.frame.midX)
         cDelegate = CustomContactDelegate(parent: self)
@@ -52,14 +54,14 @@ class GameScene: SKScene{
         monsterFactory = MonsterFactory(parent: self)
         
         
+        startMonsterGeneration()
+        startPointEarning()
+        startWallGeneration()
         
         
-        runAction(SKAction.repeatActionForever(  //monsterFactory.generateMonster))
-            SKAction.sequence([
-                SKAction.runBlock(monsterFactory!.generateMonster /*{ self.addMonster(self.goodInteger) } */),
-                SKAction.waitForDuration(NSTimeInterval(Global.random(min: 0.8, max: 1.5)))
-                ])
-            ))
+        
+        
+        
         
     }
     
@@ -82,6 +84,7 @@ class GameScene: SKScene{
         var directionVector = CGVector(dx: (currentTouchPoint.x - touchPoint!.x)/(vectorReduction*4), dy:(currentTouchPoint.y - touchPoint!.y) / vectorReduction)
         
         player!.jump(directionVector)
+        
         //if player!.playerFooting > 0 { player!.physicsBody!.applyImpulse(directionVector)}
         
         /*
@@ -103,18 +106,21 @@ class GameScene: SKScene{
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        
+        //Calculates distance travelled
         distanceTravelled += Float(Float(player!.frame.midX) - lastKnownPosition)
         lastKnownPosition = Float(player!.frame.midX)
         score!.text = "\(Int(distanceTravelled))"
         
-        
+        //If outside left border
         if(player!.frame.midX < 0  || player!.frame.midY < 0){
-            println("Game over, m8")
             removeMob(player!)
-            controller?.displayEndScene()
+            gameOver()
         }
         
-        let screenScale:CGFloat = 0.75
+        
+        //If outside right border
+        let screenScale:CGFloat = 0.5
         if(player!.frame.midX > size.width*screenScale){
             let diff:CGFloat = player!.frame.midX - size.width*screenScale
             distanceTravelled += Float(diff)
@@ -122,6 +128,8 @@ class GameScene: SKScene{
                 mob.runAction(SKAction.moveByX(-1*diff, y: 0, duration: 0))
             }
         }
+        
+        //
         
         println("\(mobs!.count)")
         
@@ -149,18 +157,37 @@ class GameScene: SKScene{
         floor.physicsBody?.contactTestBitMask = PhysicsCategory.All
         floor.physicsBody?.collisionBitMask = PhysicsCategory.All
         floor.physicsBody?.restitution = 0
+        floor.physicsBody?.friction = 0.3
         floor.physicsBody?.dynamic = false
         
         addChild(floor)
     }
+    
+    func addCeiling(){
+        //var floor = SKShapeNode(CGRect(x: 0, y: 0, width: size.width, height: size.height * 0.01))
+        var floor = SKSpriteNode(color: SKColor.blackColor(), size: CGSize(width: size.width*2, height: size.height * 0.01)) //(rect: CGRect(x: 0, y: 0, width: size.width, height: size.height * 0.01))
+        floor.position = CGPoint(x: size.width, y: size.height)
+        floor.physicsBody = SKPhysicsBody(rectangleOfSize: floor.frame.size)
+        //floor.physicsBody = SKPhysicsBody(rectangleOfSize: floor.frame.size, center: CGPoint(x: floor.frame.size.width/2, y: floor.frame.size.height/2))
+        //floor.physicsBody = SKPhysicsBody(edgeLoopFromRect: floor.frame)
+        floor.physicsBody?.categoryBitMask = PhysicsCategory.Floor
+        floor.physicsBody?.contactTestBitMask = PhysicsCategory.All
+        floor.physicsBody?.collisionBitMask = PhysicsCategory.All
+        floor.physicsBody?.restitution = 0
+        floor.physicsBody?.dynamic = false
+        
+        addChild(floor)
+    }
+    
     func addScore(){
         score = SKLabelNode(fontNamed: "Helvetica")
 
         score!.text = "0"
-        score!.fontColor = SKColor.blackColor()
+        score!.fontColor = SKColor.blueColor()
         score!.fontSize = 30
         score!.position = CGPoint(x: size.width - score!.frame.width/2, y: size.height - score!.frame.height)
         score!.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Right
+        score!.zPosition = 1
         addChild(score!)
         
     }
@@ -168,6 +195,74 @@ class GameScene: SKScene{
     func removeMob(mob: SKSpriteNode){
         let index = find(mobs!, mob)
         mobs?.removeAtIndex(index!)
+    }
+    
+    func gameOver(){
+        controller!.honorPoints += Int(distanceTravelled/1000)
+        controller!.displayEndScene()
+    }
+    
+    func startMonsterGeneration(){
+        runAction(SKAction.repeatActionForever(  //monsterFactory.generateMonster))
+            SKAction.sequence([
+                SKAction.runBlock(monsterFactory!.generateMonster /*{ self.addMonster(self.goodInteger) } */),
+                SKAction.waitForDuration(NSTimeInterval(Global.random(min: 0.8, max: 1.5)))
+                ])
+            ))
+    }
+    
+    func startPointEarning(){
+        runAction(SKAction.repeatActionForever(
+            SKAction.sequence([
+                SKAction.runBlock({ self.distanceTravelled += 1}),
+                SKAction.waitForDuration(0.05)
+                ])
+            ))
+    }
+    
+    func startWallGeneration(){
+        
+        
+        runAction(SKAction.repeatActionForever(
+            
+            SKAction.sequence([
+                SKAction.runBlock({
+                    if self.distanceTravelled > 3500 {
+                        if self.lastWallPlacedAt + 400 < self.distanceTravelled{
+                            let index = Global.randomInt(2)
+                            var wall = SKSpriteNode(color: SKColor.blackColor(), size: CGSize(width: self.size.width / 20, height: Global.random(min: self.size.height / 10, max: self.size.height / 2)))
+                            
+                            wall.physicsBody = SKPhysicsBody(rectangleOfSize: wall.size)
+                            wall.physicsBody!.restitution = 0.01
+                            wall.physicsBody!.dynamic = false
+                            //wall.physicsBody!.affectedByGravity = false
+                            wall.physicsBody!.categoryBitMask = PhysicsCategory.Floor
+                            wall.physicsBody!.collisionBitMask = PhysicsCategory.All
+                            wall.physicsBody!.contactTestBitMask = PhysicsCategory.All
+                            wall.name = "wall"
+                            
+                            switch index {
+                            case 0:
+                                wall.position = CGPoint(x: self.size.width, y: 0)
+                            default:
+                                wall.position = CGPoint(x: self.size.width, y: self.size.height - wall.size.height/2)
+                            }
+                            self.lastWallPlacedAt = self.distanceTravelled
+                            self.mobs!.append(wall)
+                            self.addChild(wall)
+                            var moveAction = SKAction.moveBy(CGVector(dx: self.size.width * -0.01, dy: 0.01), duration: 0.022)
+                            wall.runAction(SKAction.sequence([
+                                SKAction.repeatAction(moveAction, count: 300),
+                                SKAction.runBlock({ self.removeMob(wall) }),
+                                SKAction.runBlock(wall.removeFromParent)
+                                ]))
+                        }
+                    }
+                    
+                }),
+                SKAction.waitForDuration(0.2)
+                ])
+            ))
     }
     
     

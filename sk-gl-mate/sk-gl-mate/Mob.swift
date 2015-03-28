@@ -12,7 +12,8 @@ class Mob: SKSpriteNode {
     
     var playerFooting:NSInteger = 0;
     var home:GameScene?
-    var mobSize:CGFloat = 0.075 
+    var mobSize:CGFloat = 0.075
+    var isDoubleJumpAvailable = false
     
     init(parent: GameScene){
         super.init(
@@ -38,8 +39,8 @@ class Mob: SKSpriteNode {
         physicsBody?.restitution = 0
         physicsBody?.dynamic = true
         
-        physicsBody?.collisionBitMask = PhysicsCategory.Floor | PhysicsCategory.Monster | PhysicsCategory.Player
-        physicsBody?.contactTestBitMask = PhysicsCategory.Floor | PhysicsCategory.Monster | PhysicsCategory.Player
+        physicsBody?.collisionBitMask = PhysicsCategory.All ^ PhysicsCategory.Assassin
+        physicsBody?.contactTestBitMask = PhysicsCategory.All ^ PhysicsCategory.Assassin
         
         self.name = "mob"
         
@@ -53,6 +54,10 @@ class Mob: SKSpriteNode {
         if playerFooting > 0{
             self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 4.5))
         }
+    }
+    
+    func readyDoubleJump(){
+        
     }
     
 }

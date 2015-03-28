@@ -13,7 +13,7 @@ class Jumper : Monster{
     override init(parent: GameScene) {
         super.init(parent: parent)
         color = SKColor.brownColor()
-        
+        physicsBody?.categoryBitMask = PhysicsCategory.Jumper
     }
 
     required init?(coder aDecoder: NSCoder) {

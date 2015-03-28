@@ -16,7 +16,7 @@ class MonsterFactory{
         home = parent
     }
     
-    func generateMonster(){
+    func getRandomMonster() -> Monster{
         let index = Global.randomInt(MonsterCategory.max)
         var monster:Monster
         switch index{
@@ -30,6 +30,22 @@ class MonsterFactory{
             monster = Monster(parent: home!)
         }
         
+        return monster
+    }
+    
+    func generateMonster(){
+        
+        
+        
+        var monster = getRandomMonster()
+        
+        if isAssassinAlive() {
+            while monster.physicsBody!.categoryBitMask == PhysicsCategory.Assassin
+            {
+                monster = getRandomMonster()
+            }
+        }
+        
         home!.addChild(monster)
         home!.mobs!.append(monster)
         
@@ -37,13 +53,13 @@ class MonsterFactory{
         
     }
     
-    func createStandart() -> Monster{
-        var monster = Monster(parent: home!)
-        return monster
-    }
-    func createJumper() -> Monster{
-        var monster = Jumper(parent: home!)
-        
-        return monster
+    func isAssassinAlive() -> Bool {
+        var assassinAlive = false
+        for mob in home!.mobs! {
+            if mob.physicsBody!.categoryBitMask == PhysicsCategory.Assassin {
+                assassinAlive = true
+            }
+        }
+        return assassinAlive
     }
 }

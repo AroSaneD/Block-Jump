@@ -19,6 +19,6 @@ import SpriteKit
     }
     
     class func randomInt(max: NSInteger) -> NSInteger {
-        return Int(arc4random_uniform(UInt32(MonsterCategory.max)))
+        return Int(arc4random_uniform(UInt32(max)))
     }
 }

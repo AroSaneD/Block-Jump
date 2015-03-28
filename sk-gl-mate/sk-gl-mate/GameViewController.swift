@@ -12,6 +12,12 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    var honorPoints: Int = 100
+    
+    //purchasedItems
+    var doubleJump = false
+    var doublePoints = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         displayGameScene()
@@ -50,6 +56,7 @@ class GameViewController: UIViewController {
         skView.showsPhysics = true
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
+        
         
         /* Set the scale mode to scale to fit the window */
         scene.scaleMode = .ResizeFill
